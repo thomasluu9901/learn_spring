@@ -16,7 +16,7 @@ import java.util.Objects;
  * @created 22/03/2023 - 10:37 PM
  * @project learn.java
  */
-@Entity
+@Entity(name = "user_entity")
 @Getter
 @Setter
 @ToString
