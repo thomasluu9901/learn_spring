@@ -1,8 +1,7 @@
-package com.vn.learn.java.Entity;
+package com.vn.learn.java.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.springframework.context.event.EventListener;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -22,11 +21,12 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(name = "email", unique = true)
     private String email;
     private String pass;
     @Column(name = "created_date")
@@ -39,6 +39,8 @@ public class User {
     private LocalDateTime updatedDate;
     @Column(name = "updated_by")
     private String updatedBy;
+    @Column(name = "order_column")
+    private String  orderColumn;
 
     @PrePersist
     private void insert(){
@@ -53,7 +55,7 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        User user = (User) o;
+        UserEntity user = (UserEntity) o;
         return getId() != null && Objects.equals(getId(), user.getId());
     }
 
